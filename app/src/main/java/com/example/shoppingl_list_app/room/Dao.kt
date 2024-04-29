@@ -55,28 +55,34 @@ interface  ListDao{
    suspend fun insertShoppingList(shoppingList: ShoppingList)
 
 
-      @Query(""" 
+      @Query(
+          """ 
     SELECT*FROM items AS I INNER JOIN shopping_List AS S
-    ON I.listIdFk= S.List_id INNER JOIN stores AS ST
+    ON I.listId= S.List_id INNER JOIN stores AS ST
     ON I.storeIdFk = ST.store_id
-    """)
+    """
+      )
 
       fun getItemsWithStoreAndList():Flow<List<ItemsWithStoreAndList>>
 
-    @Query(""" 
+    @Query(
+        """ 
     SELECT*FROM items AS I INNER JOIN shopping_List AS S
-    ON I.listIdFk= S.List_id INNER JOIN stores AS ST
+    ON I.listId= S.List_id INNER JOIN stores AS ST
     ON I.storeIdFk = ST.store_id WHERE ST.listIdFk
-    """)
+    """
+    )
 
     fun getItemWithStoreAndListFilteredById(itemId:Int)
     :Flow<List<ItemsWithStoreAndList>>
 
-    @Query(""" 
+    @Query(
+        """ 
     SELECT*FROM items AS I INNER JOIN shopping_List AS S
-    ON I.listIdFk= S.List_id INNER JOIN stores AS ST
+    ON I.listId= S.List_id INNER JOIN stores AS ST
     ON I.storeIdFk = ST.store_id WHERE I.item_id =:itemId
-    """)
+    """
+    )
 
     fun getItemsWithStoreAndListFilteredById(itemId: Int)
             :Flow<ItemsWithStoreAndList>
