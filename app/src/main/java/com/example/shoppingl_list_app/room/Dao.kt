@@ -53,9 +53,7 @@ interface StoreDao {
 interface  ListDao{
   @Insert(onConflict = OnConflictStrategy.REPLACE)
    suspend fun insertShoppingList(shoppingList: ShoppingList)
-
-
-      @Query(
+   @Query(
           """ 
     SELECT*FROM items AS I INNER JOIN shopping_List AS S
     ON I.listId= S.List_id INNER JOIN stores AS ST
@@ -69,11 +67,11 @@ interface  ListDao{
         """ 
     SELECT*FROM items AS I INNER JOIN shopping_List AS S
     ON I.listId= S.List_id INNER JOIN stores AS ST
-    ON I.storeIdFk = ST.store_id WHERE ST.listIdFk
+    ON I.storeIdFk = ST.store_id WHERE S.List_id=:listId
     """
     )
 
-    fun getItemWithStoreAndListFilteredById(itemId:Int)
+    fun getItemsWithStoreAndListFilteredById(listId:Int)
     :Flow<List<ItemsWithStoreAndList>>
 
     @Query(
@@ -84,13 +82,12 @@ interface  ListDao{
     """
     )
 
-    fun getItemsWithStoreAndListFilteredById(itemId: Int)
+    fun getItemWithStoreAndListFilteredById(itemId:Int)
             :Flow<ItemsWithStoreAndList>
 
 
 
 }
-
 
 data class ItemsWithStoreAndList(
     @Embedded val item: Item,

@@ -4,10 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.shoppingl_list_app.models.Item
 import com.example.shoppingl_list_app.models.ShoppingList
 import com.example.shoppingl_list_app.models.Store
+import com.example.shoppingl_list_app.room.converters.DateConverter
 
+
+
+@TypeConverters(value =[DateConverter::class])
 @Database(
     entities = [ShoppingList::class, Item::class, Store::class],
     version = 1,
