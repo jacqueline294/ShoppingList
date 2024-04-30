@@ -92,5 +92,5 @@ interface  ListDao{
 data class ItemsWithStoreAndList(
     @Embedded val item: Item,
     @Embedded val shoppingList: ShoppingList,
-    @Embedded val store: Store
+    @Embedded val store: Store, val size: Int
 )

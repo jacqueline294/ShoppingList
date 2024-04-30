@@ -82,7 +82,11 @@ dependencies {
         implementation("androidx.room:room-guava:$room_version")
         testImplementation("androidx.room:room-testing:$room_version")
         implementation("androidx.room:room-paging:$room_version")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
     }
+
+
 
 
 
