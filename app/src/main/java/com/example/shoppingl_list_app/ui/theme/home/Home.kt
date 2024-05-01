@@ -88,7 +88,7 @@ fun CategoryItem(
             else MaterialTheme.colorScheme.onSurface
         ),
         colors = CardDefaults.cardColors(
-            containerColor = if (isSelected()) MaterialTheme.colorScheme.primary.copy(.5f)
+            containerColor = if (isSelected()) MaterialTheme.colorScheme.primary.copy(0.5f)
             else MaterialTheme.colorScheme.surface,
             contentColor = if (isSelected()) MaterialTheme.colorScheme.onPrimary
             else MaterialTheme.colorScheme.surface
