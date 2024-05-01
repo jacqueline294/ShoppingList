@@ -23,13 +23,17 @@ data class  Item(
     val listId: Int,
     val storeIdFk: Int,
     val date: Date,
-    val isChecked: Boolean
-)
+    val isChecked: Boolean,
+    val itemName: String
+) {
+
+}
 
 @Entity(tableName = "stores")
 data class Store(
     @ColumnInfo(name = "store_id")
     @PrimaryKey
     val id: Int =0,
-    val listIdFk: Int
+    val listIdFk: Int,
+    val storeName: String
 )
