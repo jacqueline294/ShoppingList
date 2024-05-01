@@ -1,4 +1,4 @@
-package com.example.shoppingl_list_app.room
+package com.example.shoppingl_list_app.data.room
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -92,5 +92,5 @@ interface  ListDao{
 data class ItemsWithStoreAndList(
     @Embedded val item: Item,
     @Embedded val shoppingList: ShoppingList,
-    @Embedded val store: Store, val size: Int
+    @Embedded val store: Store
 )

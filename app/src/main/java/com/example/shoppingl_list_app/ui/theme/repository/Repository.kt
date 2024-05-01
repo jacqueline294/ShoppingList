@@ -3,12 +3,12 @@ package com.example.shoppingl_list_app.ui.theme.repository
 import com.example.shoppingl_list_app.models.Item
 import com.example.shoppingl_list_app.models.ShoppingList
 import com.example.shoppingl_list_app.models.Store
-import com.example.shoppingl_list_app.room.ItemDao
-import com.example.shoppingl_list_app.room.ListDao
-import com.example.shoppingl_list_app.room.StoreDao
+import com.example.shoppingl_list_app.data.room.ItemDao
+import com.example.shoppingl_list_app.data.room.ListDao
+import com.example.shoppingl_list_app.data.room.StoreDao
 
 class Repository (
-    private val listDao:ListDao,
+    private val listDao: ListDao,
     private val storeDao: StoreDao,
     private val itemDao: ItemDao
 ) {

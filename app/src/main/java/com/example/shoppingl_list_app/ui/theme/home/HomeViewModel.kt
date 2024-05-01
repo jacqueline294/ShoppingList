@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.shoppingl_list_app.Category
 import com.example.shoppingl_list_app.Graph
 import com.example.shoppingl_list_app.models.Item
-import com.example.shoppingl_list_app.room.ItemsWithStoreAndList
+import com.example.shoppingl_list_app.data.room.ItemsWithStoreAndList
 import com.example.shoppingl_list_app.ui.theme.repository.Repository
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -59,7 +59,7 @@ class HomeViewModel(private val repository: Repository = Graph.repository)
                     shoppingListId
                 )
                     .collectLatest {
-                    state = state.copy(items= it)
+                        state.copy(items = listOf(it))
                 }
             }
         } else {
@@ -67,6 +67,8 @@ class HomeViewModel(private val repository: Repository = Graph.repository)
         }
     }
 }
+
+
 
 data class HomeState(
     val items: List<ItemsWithStoreAndList> = emptyList(),

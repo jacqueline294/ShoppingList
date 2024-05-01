@@ -1,7 +1,7 @@
 package com.example.shoppingl_list_app
 
 import android.content.Context
-import com.example.shoppingl_list_app.room.ShoppingListDatabase
+import com.example.shoppingl_list_app.data.room.ShoppingListDatabase
 import com.example.shoppingl_list_app.ui.theme.repository.Repository
 
 

@@ -1,4 +1,4 @@
-package com.example.shoppingl_list_app.room.converters
+package com.example.shoppingl_list_app.data.room.converters
 
 import androidx.room.TypeConverter
 import java.util.Date

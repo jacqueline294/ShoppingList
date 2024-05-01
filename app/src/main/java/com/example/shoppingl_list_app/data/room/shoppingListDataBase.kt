@@ -1,4 +1,4 @@
-package com.example.shoppingl_list_app.room
+package com.example.shoppingl_list_app.data.room
 
 import android.content.Context
 import androidx.room.Database
@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.example.shoppingl_list_app.models.Item
 import com.example.shoppingl_list_app.models.ShoppingList
 import com.example.shoppingl_list_app.models.Store
-import com.example.shoppingl_list_app.room.converters.DateConverter
+import com.example.shoppingl_list_app.data.room.converters.DateConverter
 
 
 
