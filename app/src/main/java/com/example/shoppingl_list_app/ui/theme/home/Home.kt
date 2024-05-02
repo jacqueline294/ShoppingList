@@ -66,7 +66,7 @@ fun HomeScreen(onNavigate: (Int) -> Unit) {
                     isChecked = it.item.isChecked,
                     onCheckedChange = homeViewModel::onItemCheckedChanged
                 ) {
-                  onNavigate.invoke(it.item.id)
+
                 }
 
             }
