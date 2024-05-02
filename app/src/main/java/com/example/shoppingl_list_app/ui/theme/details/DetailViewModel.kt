@@ -20,79 +20,96 @@ class DetailViewModel
     constructor(
         private val itemId:Int,
         private val  repository: Repository = Graph.repository
-    ) : ViewModel(){
+    ) : ViewModel() {
 
-        var state by mutableStateOf(DetailState())
-            private set
+    var state by mutableStateOf(DetailState())
+        private set
     val isFieldsNotEmpty: Boolean
-        get() =  state.item.isNotEmpty()&&
-                state.store.isNotEmpty()&&
+        get() = state.item.isNotEmpty() &&
+                state.store.isNotEmpty() &&
                 state.qty.isNotEmpty()
 
-    fun onItemChange(newValue:String){
-        state= state.copy(item = newValue)
+    fun onItemChange(newValue: String) {
+        state = state.copy(item = newValue)
     }
 
-    fun onStoreChange(newValue:String){
-        state= state.copy(store  = newValue)
+    fun onStoreChange(newValue: String) {
+        state = state.copy(store = newValue)
     }
-    fun onQtyChange(newValue:String){
-        state= state.copy(qty = newValue)
+
+    fun onQtyChange(newValue: String) {
+        state = state.copy(qty = newValue)
     }
-    fun onDateChange(newValue:Date){
-        state= state.copy(date = newValue)
+
+    fun onDateChange(newValue: Date) {
+        state = state.copy(date = newValue)
     }
-    fun onCategoryChange(newValue:Category){
-        state= state.copy(category  = newValue)
+
+    fun onCategoryChange(newValue: Category) {
+        state = state.copy(category = newValue)
     }
-    fun onScreenDialogDismissed(newValue:Boolean){
-        state= state.copy(isScreenDialogDismissed = newValue)
+
+    fun onScreenDialogDismissed(newValue: Boolean) {
+        state = state.copy(isScreenDialogDismissed = newValue)
     }
-    private fun addListItem(){
+
+    private fun addListItem() {
         viewModelScope.launch {
-          Utils.category.forEach{
-              repository.insertList(
-                  ShoppingList(
-                      id =it.id,
-                      name = it.title
-                  )
-              )
-          }
+            Utils.category.forEach {
+                repository.insertList(
+                    ShoppingList(
+                        id = it.id,
+                        name = it.title
+                    )
+                )
+            }
         }
     }
 
-      fun addShoppingItem(){
-          viewModelScope.launch {
-              repository.insertItem(
-                  Item(
-                      itemName = state.item,
-                      listId = state.category.id,
-                      date = state.date,
-                      quantity = state.qty,
-                      storeIdFk = state.storeList.find {
-                          it.storeName == state.store
-                      }?.id?: 0,
-                      isChecked = false
+    fun addShoppingItem() {
+        viewModelScope.launch {
+            repository.insertItem(
+                Item(itemName = state.item,
+                    listId = state.category.id,
+                    date = state.date,
+                    quantity = state.qty,
+                    storeIdFk = state.storeList.find {
+                        it.storeName == state.store
+                    }?.id ?: 0,
+                    isChecked = false)
+            )
+        }
+    }
 
-                  )
-              )
-          }
-      }
+    fun updateShoppingItem(id: Int) {
+        viewModelScope.launch {
+            repository.insertItem(
+                Item(
+                    itemName = state.item,
+                    listId = state.category.id,
+                    date = state.date,
+                    quantity = state.qty,
+                    storeIdFk = state.storeList.find {
+                        it.storeName == state.store
+                    }?.id ?: 0,
+                    isChecked = false,
+                    id = id
 
-
+                )
+            )
+        }
 
     }
 
 
-
-
-data class DetailState(
-    val storeList:List<Store> = emptyList(),
-    val item: String = "",
-    val store: String ="",
-    val date: Date = Date(),
-    val qty :String = "",
-    val isScreenDialogDismissed: Boolean = true,
-    val isUpdatingItem: Boolean = false,
-    val category: Category = Category(),
-)
+    data class DetailState(
+        val storeList: List<Store> = emptyList(),
+        val item: String = "",
+        val store: String = "",
+        val date: Date = Date(),
+        val qty: String = "",
+        val isScreenDialogDismissed: Boolean = true,
+        val isUpdatingItem: Boolean = false,
+        val category: Category = Category(),
+    )
+}
