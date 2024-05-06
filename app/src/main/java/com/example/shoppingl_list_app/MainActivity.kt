@@ -1,11 +1,13 @@
 package com.example.shoppingl_list_app
 
+import ShoppingListNavigation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.shoppingl_list_app.ui.theme.home.HomeScreen
 import com.example.shoppingl_list_app.ui.theme.theme.ShoppingTheme
@@ -20,13 +22,17 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 )
                 {
-                    HomeScreen(onNavigate = {})
+                   ShoppingApp()
 
 
                 }
 
         }
     }
+   @Composable
+   fun ShoppingApp(){
+       ShoppingListNavigation()
+   }
 }
 
 

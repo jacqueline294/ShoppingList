@@ -5,13 +5,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.widget.DatePicker
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
@@ -49,69 +43,47 @@ import com.example.shoppingl_list_app.Utils
 import com.example.shoppingl_list_app.ui.theme.theme.Shapes
 import java.util.Calendar
 import java.util.Date
+import kotlin.reflect.KFunction1
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun DetailScreen(
-    id:Int,
-    navigateUp:() -> Unit,
-){
-    val viewModel = viewModel<DetailViewModel>(factory = DetailViewModel.DetailViewModelFactor(id))
-    Scaffold(content = {
+    id: Int,
+    navigateUp: () -> Unit,
+) {
+    val viewModel = viewModel<DetailViewModel>(factory = DetailViewModel.DetailViewModelFactory())
+    Scaffold {
         DetailEntry(
             state = viewModel.state,
-            onDateSelected = viewModel.onDateChange(),
-            onStoreChange = viewModel.onStoreChange(newValue = String()),
-            onItemChange = viewModel.onItemChange(newValue = String()),
-            onQtyChange = viewModel.onQtyChange(newValue = String()),
-            onCategoryChange = viewModel.onCategoryChange(newValue = Category()),
-            onDialogDismissed = viewModel.onScreenDialogDismissed(newValue = true),
-            onSavedStore = viewModel.addStore(),
+            onDateSelected = viewModel::onDateChange,
+            onStoreChange = viewModel::onStoreChange,
+            onItemChange = viewModel::onItemChange,
+            onQtyChange = viewModel::onQtyChange,
+            onCategoryChange = viewModel::onCategoryChange,
+            onDialogDismissed = viewModel::onScreenDialogDismissed,
+            onSavedStore = viewModel::addStore,
             UpdateItem = { viewModel.updateShoppingItem(id) },
-            saveItem = viewModel::addShoppingItem
-        ) {
-
-        }
-
-    })
-
+            saveItem = viewModel::addShoppingItem,
+            navigateUp = navigateUp
+        )
+    }
 }
-
-
-
-fun DetailEntry(
-    state: DetailViewModel.DetailState,
-    onDateSelected: Unit,
-    onStoreChange: Unit,
-    onItemChange: Unit,
-    onQtyChange: Unit,
-    onCategoryChange: Unit,
-    onDialogDismissed: Unit,
-    onSavedStore: Unit,
-    UpdateItem: () -> Unit,
-    saveItem: () -> Unit,
-    navigateUp: () -> Unit
-) {
-
-}
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun DetailEntry(
-    modifier: Modifier= Modifier,
+fun DetailEntry(
+    modifier: Modifier = Modifier,
     state: DetailViewModel.DetailState,
-    onDateSelected: () -> Unit,
-    onStoreChange:(String)->Unit,
-    onItemChange:(String)->Unit,
-    onQtyChange:(String)->Unit,
-    onCategoryChange:(Category)->Unit,
-    onDialogDismissed:(Boolean)->Unit,
-    onSavedStore:()-> Unit,
-    UpdateItem:()-> Unit,
-    saveItem:()-> Unit,
-    navigateUp:()-> Unit,
-
+    onDateSelected: (Date) -> Unit,
+    onStoreChange: (String) -> Unit,
+    onItemChange: (String) -> Unit,
+    onQtyChange: (String) -> Unit,
+    onCategoryChange: (Category) -> Unit,
+    onDialogDismissed: (Boolean) -> Unit,
+    onSavedStore: () -> Unit,
+    UpdateItem: () -> Unit,
+    saveItem: KFunction1<Int, Unit>,
+    navigateUp: () -> Unit
     ){
     var isNewEnabled by remember {
         mutableStateOf(false)
@@ -206,7 +178,7 @@ private fun DetailEntry(
                 val mDatePicker= datePickerDialog(
                     context = LocalContext.current,
                     onDateSelected = {date ->
-                        onDateSelected.invoke()
+                        onDateSelected()
 
                     }
 
@@ -255,7 +227,7 @@ private fun DetailEntry(
                         UpdateItem.invoke()
                     }
                     false -> {
-                        saveItem.invoke()
+                        saveItem()
                     }
                 }
                 navigateUp
@@ -277,6 +249,14 @@ private fun DetailEntry(
 
 }
 
+fun onDateSelected() {
+    TODO()
+}
+
+fun saveItem() {
+    TODO()
+}
+
 @Composable
 fun datePickerDialog(
     context:Context,
@@ -291,7 +271,7 @@ fun datePickerDialog(
 
     val mDatePickerDialog= DatePickerDialog(
         context,
-        {_: DatePicker,mYears:Int,mMonth:Int,mDayofMonth:Int ->
+        { _: DatePicker, mYears:Int, mMonth:Int, mDayofMonth:Int ->
             val  calendar= Calendar.getInstance()
             calendar.set(mYears,mMonth,mDayofMonth)
             onDateSelected.invoke(calendar.time)
@@ -307,14 +287,28 @@ fun PrevDetailEntry(){
     DetailEntry(
         state = DetailViewModel.DetailState(),
         onDateSelected = {},
-        onStoreChange ={} ,
+        onStoreChange ={},
         onItemChange = {},
-        onQtyChange ={} ,
-        onCategoryChange ={} ,
-        onDialogDismissed ={} ,
-        onSavedStore = { /*TODO*/ },
-        UpdateItem = { /*TODO*/ },
-        saveItem = { /*TODO*/ }) {
+        onQtyChange ={},
+        onCategoryChange ={},
+        onDialogDismissed ={},
+        onSavedStore = {  },
+        UpdateItem = { },
+        saveItem = {}
+    )
+}
 
-    }
+fun DetailEntry(
+    state: DetailViewModel.DetailState,
+    onDateSelected: (Date) -> Unit,
+    onStoreChange: (String) -> Unit,
+    onItemChange: (String) -> Unit,
+    onQtyChange: (String) -> Unit,
+    onCategoryChange: (Category) -> Unit,
+    onDialogDismissed: (Boolean) -> Unit,
+    onSavedStore: () -> Unit,
+    UpdateItem: () -> Unit,
+    saveItem: () -> Unit
+) {TODO("Not yet implemented")
+
 }

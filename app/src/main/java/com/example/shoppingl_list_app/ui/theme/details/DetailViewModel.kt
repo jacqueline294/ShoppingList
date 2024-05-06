@@ -198,4 +198,8 @@ class DetailViewModel(
         val isUpdatingItem: Boolean = false,
         val category: Category = Category()
     )
+
+    class DetailViewModelFactory : ViewModelProvider.Factory {
+
+    }
 }
