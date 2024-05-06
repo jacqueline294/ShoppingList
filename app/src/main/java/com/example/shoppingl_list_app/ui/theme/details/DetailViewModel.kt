@@ -21,8 +21,10 @@ class DetailViewModel(
     private val itemId: Int,
     private val repository: Repository = Graph.repository
 ) : ViewModel() {
-    var state by mutableStateOf(DetailState())  
-        private set                             
+
+
+    var state by mutableStateOf(DetailState())
+        private set
     init {
         addListItem()
         getStores()
@@ -32,7 +34,7 @@ class DetailViewModel(
                     .getItemWithStoreAndListFilteredById(itemId)
                     .collectLatest {
                         state = state.copy(
-                            item.it.item.itemName,
+                            item =it.item.itemName,
                             store = it.store.storeName,
                             date = it.item.date,
                             category = Utils.category.find { c ->
@@ -77,7 +79,8 @@ class DetailViewModel(
     }
 
     fun onDateChange(newValue: Date) {
-        state = state.copy(date = newValue)
+
+        state = state.copy(date =newValue)
     }
 
     fun onCategoryChange(newValue: Category) {
@@ -101,22 +104,38 @@ class DetailViewModel(
         }
     }
 
-    fun addShoppingItem() {
+    fun addShoppingItem(id: Int) {
         viewModelScope.launch {
+
             repository.insertItem(
                 Item(
-                    itemName = state.item,
                     listId = state.category.id,
                     date = state.date,
                     quantity = state.qty,
                     storeIdFk = state.storeList.find {
                         it.storeName == state.store
                     }?.id ?: 0,
-                    isChecked = false
+                    isChecked = false,
+                    id = id,
+                    itemName = state.item
                 )
             )
         }
     }
+
+    private fun Item(
+        listId: Int,
+        date: Date,
+        quantity: String,
+        storeIdFk: Int,
+        isChecked: Boolean,
+        id: Int,
+        itemName: String
+    ): Item {
+
+        return TODO("Provide the return value")
+    }
+
 
     fun updateShoppingItem(id: Int) {
         viewModelScope.launch {
@@ -131,6 +150,7 @@ class DetailViewModel(
                     }?.id ?: 0,
                     isChecked = false,
                     id = id
+
                 )
             )
         }
@@ -157,7 +177,10 @@ class DetailViewModel(
         }
     }
 
- class DetailViewModelFactor(  private val id : Int):ViewModelProvider.Factory{
+
+
+    @Suppress("UNCHECKED_CAST")
+    class DetailViewModelFactor(  private val id : Int):ViewModelProvider.Factory{
      override fun <T : ViewModel> create(modelClass: Class<T>): T {
          return DetailViewModel(itemId = id)  as T
      }
