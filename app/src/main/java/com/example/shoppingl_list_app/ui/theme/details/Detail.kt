@@ -37,8 +37,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.shoppingl_list_app.Category
-import com.example.shoppingl_list_app.Composambles.CategoryItem
-import com.example.shoppingl_list_app.Composambles.formatDate
+import com.example.shoppingl_list_app.Composables.CategoryItem
+import com.example.shoppingl_list_app.Composables.formatDate
 import com.example.shoppingl_list_app.Utils
 import com.example.shoppingl_list_app.ui.theme.theme.Shapes
 import java.util.Calendar

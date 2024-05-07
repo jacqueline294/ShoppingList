@@ -1,4 +1,4 @@
-package com.example.shoppingl_list_app.Composambles
+package com.example.shoppingl_list_app.Composables
 
 import android.icu.text.SimpleDateFormat
 import androidx.compose.foundation.clickable

@@ -1,5 +1,4 @@
 package com.example.shoppingl_list_app.ui.theme.home
-
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue

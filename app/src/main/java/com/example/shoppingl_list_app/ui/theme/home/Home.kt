@@ -18,8 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.shoppingl_list_app.Category
-import com.example.shoppingl_list_app.Composambles.CategoryItem
-import com.example.shoppingl_list_app.Composambles.ShoppingItems
+import com.example.shoppingl_list_app.Composables.CategoryItem
+import com.example.shoppingl_list_app.Composables.ShoppingItems
 import com.example.shoppingl_list_app.Utils
 
 

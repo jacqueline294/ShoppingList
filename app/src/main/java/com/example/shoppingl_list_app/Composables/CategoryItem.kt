@@ -1,4 +1,4 @@
-package com.example.shoppingl_list_app.Composambles
+package com.example.shoppingl_list_app.Composables
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke

@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -37,6 +38,7 @@ android {
 
     buildFeatures {
         compose = true
+        viewBinding = true
     }
 
     composeOptions {
@@ -61,6 +63,10 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.7")
     implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation("androidx.test:monitor:1.6.1")
+    implementation("androidx.test.ext:junit-ktx:1.1.5")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     implementation("androidx.room:room-rxjava2:2.6.1")
@@ -69,6 +75,7 @@ dependencies {
     testImplementation("androidx.room:room-testing:2.6.1")
     implementation("androidx.room:room-paging:2.6.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation ("com.google.maps.android:maps-compose:2.7.2")
+    implementation ("com.google.android.gms:play-services-maps:18.0.2")
 
-    // Other dependencies remain unchanged
 }
