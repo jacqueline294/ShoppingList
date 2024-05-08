@@ -28,7 +28,7 @@ import java.util.Locale
 fun ShoppingItems(
     item: ItemsWithStoreAndList,
     isChecked:Boolean,
-    onCheckedChange:(Item, Boolean) ->Unit,
+    onCheckedChange: (Item) -> Unit,
     onItemClick:() -> Unit,
 ){
     Card(
@@ -69,8 +69,8 @@ fun ShoppingItems(
                 )
                 Spacer(modifier = Modifier.size(4.dp))
                 Checkbox(checked = isChecked,
-                    onCheckedChange ={onCheckedChange.invoke(item.item,it)} )
-
+                    onCheckedChange = { onCheckedChange.invoke(item.item) }
+                )
             }
 
             }

@@ -24,7 +24,6 @@ import com.example.shoppingl_list_app.Utils
 
 
 
-
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(onNavigate: (Int) -> Unit) {
@@ -41,38 +40,36 @@ fun HomeScreen(onNavigate: (Int) -> Unit) {
     ) {
         LazyColumn {
             item {
-
-
-
-
-
                 LazyRow {
                     items(Utils.category) { category: Category ->
                         CategoryItem(
                             iconRes = category.resId,
                             title = category.title,
-                            selected =  category === homeState.category
-
-                        ){
+                            selected = category === homeState.category
+                        ) {
                             homeViewModel.onCategoryChange(category)
                         }
                         Spacer(modifier = Modifier.size(16.dp))
                     }
-
                 }
             }
-            items(homeState.items){
-                ShoppingItems(item = it,
+            items(homeState.items) {
+                ShoppingItems(
+                    item = it,
                     isChecked = it.item.isChecked,
-                    onCheckedChange = homeViewModel::onItemCheckedChanged
+                    onCheckedChange = { isChecked ->
+                        if (isChecked){
+                            homeViewModel.onEvent(HomeViewModel.Event.ItemChecked(it.item))
+                        } else {
+                            homeViewModel.onEvent(HomeViewModel.Event.ItemUnchecked(it.item))
+                        }
+                    }
                 ) {
 
                 }
+                }
 
+                }
             }
         }
-    }
-}
-
-
 
